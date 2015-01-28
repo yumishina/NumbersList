@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		333622E41A79174C00DD99FC /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 333622E31A79174C00DD99FC /* CoreData.framework */; };
 		B221035A1A75FB9800BD0138 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B22103591A75FB9800BD0138 /* main.m */; };
 		B221035D1A75FB9800BD0138 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B221035C1A75FB9800BD0138 /* AppDelegate.m */; };
 		B22103601A75FB9800BD0138 /* NumbersList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B221035E1A75FB9800BD0138 /* NumbersList.xcdatamodeld */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		333622E31A79174C00DD99FC /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		B22103541A75FB9800BD0138 /* NumbersList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NumbersList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B22103581A75FB9800BD0138 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B22103591A75FB9800BD0138 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -49,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				333622E41A79174C00DD99FC /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +71,7 @@
 				B22103561A75FB9800BD0138 /* NumbersList */,
 				B22103731A75FB9800BD0138 /* NumbersListTests */,
 				B22103551A75FB9800BD0138 /* Products */,
+				333622E31A79174C00DD99FC /* CoreData.framework */,
 			);
 			sourceTree = "<group>";
 		};

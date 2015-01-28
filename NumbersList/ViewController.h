@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
 @interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic,strong) NSArray* arrayNumbers;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) IBOutlet UILabel *countLabel;
 
 
 @end
