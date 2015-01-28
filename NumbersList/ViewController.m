@@ -16,11 +16,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //Настройки tableView
     self.tableView.delegate = self;
     self.tableView.dataSource =  self;
      [self.navigationController.navigationBar setTranslucent:NO]; // отключаем свойство полупрозрачности панели навигации
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"customCell"];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    //Чтение JSON
+    NSURLRequest* request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"https://gist.githubusercontent.com/igor-lamoda/a80890cedd4993050bca/raw/3af83523fb34de34040bad1995f11c06d7660487/numbers.json"]];
+    NSData* response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil]; //синхронная загрузка
+   // [NSURLConnection sendAsynchronousRequest:<#(NSURLRequest *)#> queue:<#(NSOperationQueue *)#> completionHandler:<#^(NSURLResponse *response, NSData *data, NSError *connectionError)handler#>]
+    NSError* jsonParsingError = nil;
+    NSArray* tempArray = [NSJSONSerialization JSONObjectWithData:response options:0 error:&jsonParsingError];
+    NSLog(@"Есть ли массив = %lu",(unsigned long)tempArray.count);////////////
+    
+    //Сохранение данных в CoreData
+    
+    
     self.arrayNumbers = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11", @"12", @"13", @"14", @"15", @"16", @"17", @"18", @"19", @"20", @"21"];
 }
 
@@ -36,7 +49,6 @@
     cell.textLabel.text = [self.arrayNumbers objectAtIndex:indexPath.row];
     return cell;
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
