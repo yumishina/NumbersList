@@ -24,7 +24,7 @@
      [self.navigationController.navigationBar setTranslucent:NO]; // отключаем свойство полупрозрачности панели навигации
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"customCell"];
     
-    //Чтение JSON
+    //Чтение JSON readJSONAndSaveInCoreData
     NSURLRequest* request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"https://gist.githubusercontent.com/yumishina/5f9d9460a720b4dc3f19/raw/3af83523fb34de34040bad1995f11c06d7660487/numbers"]];
     NSData* response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil]; //синхронная загрузка
    // [NSURLConnection sendAsynchronousRequest:<#(NSURLRequest *)#> queue:<#(NSOperationQueue *)#> completionHandler:<#^(NSURLResponse *response, NSData *data, NSError *connectionError)handler#>]
@@ -37,11 +37,6 @@
         NSLog(@"1");
         NSManagedObjectContext* context = [self managedObjectContext];
         NSLog(@"2");
-       // NSEntityDescription * entityDescription = [NSEntityDescription insertNewObjectForEntityForName:@"Numbers" inManagedObjectContext:context];
-        NSLog(@"3");
-       // NSManagedObject *newNumbers =  [[NSManagedObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:context];
-        NSLog(@"4");
-        
         NSManagedObject* newNumbers = [NSEntityDescription insertNewObjectForEntityForName:@"Numbers" inManagedObjectContext:context];
          NSLog(@"5");
         [newNumbers setValue:[NSString stringWithFormat:@"%d", i] forKey:@"sequenceNumber"];
@@ -53,7 +48,7 @@
         }
     }
     
-    //Чтение из CoreData
+    //Чтение из CoreData readFromCoreData
     NSManagedObjectContext* managedObjectContext = [self managedObjectContext];
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Numbers"];
     self.arrayNumbers = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
