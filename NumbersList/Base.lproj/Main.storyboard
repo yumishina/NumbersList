@@ -36,21 +36,19 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73b-kd-ECb">
-                                <rect key="frame" x="0.0" y="0.0" width="160" height="41"/>
-                                <color key="backgroundColor" red="0.45316457259999998" green="1" blue="0.45813464790000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73b-kd-ECb">
+                                <rect key="frame" x="-1" y="0.0" width="160" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="160" id="6vA-9U-WLb"/>
+                                    <constraint firstAttribute="width" constant="160" id="Au3-iK-mbp"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSL-st-cjf">
-                                <rect key="frame" x="160" y="0.0" width="160" height="41"/>
-                                <color key="backgroundColor" red="1" green="0.29056993240000001" blue="0.18894769149999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSL-st-cjf">
+                                <rect key="frame" x="158" y="0.0" width="163" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="41" id="gra-iK-rcD"/>
+                                    <constraint firstAttribute="height" constant="40" id="gra-iK-rcD"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -64,23 +62,25 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="73b-kd-ECb" firstAttribute="leading" secondItem="95i-Uc-dx3" secondAttribute="leading" id="98h-QT-Qwe"/>
-                            <constraint firstItem="73b-kd-ECb" firstAttribute="baseline" secondItem="rSL-st-cjf" secondAttribute="baseline" id="ERT-i8-sXM"/>
-                            <constraint firstItem="rSL-st-cjf" firstAttribute="leading" secondItem="73b-kd-ECb" secondAttribute="trailing" id="IKk-7S-mQJ"/>
+                            <constraint firstItem="73b-kd-ECb" firstAttribute="firstBaseline" secondItem="rSL-st-cjf" secondAttribute="firstBaseline" id="9En-iG-rDG"/>
+                            <constraint firstItem="73b-kd-ECb" firstAttribute="leading" secondItem="mzN-eK-LFh" secondAttribute="leading" constant="-1" id="Ef7-7g-F5G"/>
                             <constraint firstItem="mzN-eK-LFh" firstAttribute="top" secondItem="4di-Jn-iBe" secondAttribute="bottom" constant="40" id="Ljv-NM-GwQ"/>
                             <constraint firstItem="73b-kd-ECb" firstAttribute="firstBaseline" secondItem="rSL-st-cjf" secondAttribute="firstBaseline" id="Mz9-ad-67V"/>
                             <constraint firstItem="73b-kd-ECb" firstAttribute="leading" secondItem="mzN-eK-LFh" secondAttribute="leading" id="NJN-Jh-bvX"/>
                             <constraint firstItem="rSL-st-cjf" firstAttribute="top" secondItem="4di-Jn-iBe" secondAttribute="bottom" id="OFX-In-xIa"/>
                             <constraint firstItem="mzN-eK-LFh" firstAttribute="bottom" secondItem="zxq-Ke-KRW" secondAttribute="top" id="PyH-ir-QVk"/>
                             <constraint firstItem="mzN-eK-LFh" firstAttribute="leading" secondItem="95i-Uc-dx3" secondAttribute="leading" id="Qyj-iE-xDQ"/>
-                            <constraint firstItem="mzN-eK-LFh" firstAttribute="trailing" secondItem="rSL-st-cjf" secondAttribute="trailing" id="Vz2-77-PpL"/>
+                            <constraint firstItem="mzN-eK-LFh" firstAttribute="trailing" secondItem="rSL-st-cjf" secondAttribute="trailing" constant="-1" id="Vz2-77-PpL"/>
+                            <constraint firstItem="rSL-st-cjf" firstAttribute="leading" secondItem="73b-kd-ECb" secondAttribute="trailing" constant="-1" id="Zog-ae-r01"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rSL-st-cjf" secondAttribute="trailing" constant="-16" id="aMA-b1-gtE"/>
                             <constraint firstAttribute="trailing" secondItem="mzN-eK-LFh" secondAttribute="trailing" id="dCI-QX-dMG"/>
-                            <constraint firstItem="73b-kd-ECb" firstAttribute="firstBaseline" secondItem="rSL-st-cjf" secondAttribute="firstBaseline" id="nRb-HY-o3o"/>
+                            <constraint firstItem="73b-kd-ECb" firstAttribute="baseline" secondItem="rSL-st-cjf" secondAttribute="baseline" id="rSK-sR-1p5"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="98h-QT-Qwe"/>
                                 <exclude reference="Mz9-ad-67V"/>
+                                <exclude reference="NJN-Jh-bvX"/>
                                 <exclude reference="aMA-b1-gtE"/>
                             </mask>
                         </variation>
@@ -91,6 +91,7 @@
                     <connections>
                         <outlet property="countLabel" destination="73b-kd-ECb" id="ZsN-Uf-96V"/>
                         <outlet property="tableView" destination="mzN-eK-LFh" id="Z26-jB-Kn3"/>
+                        <outlet property="timeLabel" destination="rSL-st-cjf" id="ojV-0l-iXv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dUu-Kg-fOz" userLabel="First Responder" sceneMemberID="firstResponder"/>
