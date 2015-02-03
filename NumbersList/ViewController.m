@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "ReceivingData.h"
+#import "Numbers.h"
 
 @interface ViewController ()
 
@@ -52,15 +53,20 @@
         for (int i = 0; i < array.count; i++) {
             NSLog(@"порядковый номер =  %d",i);
             NSManagedObjectContext* context = [self managedObjectContext];
-            NSManagedObject* newNumbers = [NSEntityDescription insertNewObjectForEntityForName:@"Numbers" inManagedObjectContext:context];
-            [newNumbers setValue:[NSString stringWithFormat:@"%d", i] forKey:@"sequenceNumber"];
-            [newNumbers setValue:[NSString stringWithFormat:@"%@", [array objectAtIndex:i]] forKey:@"number"];
+           // NSManagedObject* newNumbers = [NSEntityDescription insertNewObjectForEntityForName:@"Numbers" inManagedObjectContext:context];
+           // [newNumbers setValue:[NSString stringWithFormat:@"%d", i] forKey:@"sequenceNumber"];
+           // [newNumbers setValue:[NSString stringWithFormat:@"%@", [array objectAtIndex:i]] forKey:@"number"];
+            
+            Numbers *newNumber = [NSEntityDescription insertNewObjectForEntityForName:@"Numbers"
+                                          inManagedObjectContext:context];
+            
+            newNumber.sequenceNumber = [NSString stringWithFormat:@"%d", i];
+            newNumber.number = [NSString stringWithFormat:@"%@", [array objectAtIndex:i]];
             
             NSError* error = nil;
             if (![context save: &error]) {
                 NSLog(@"Can't save! %@ %@",error, [error localizedDescription]);
             }
-            
         }
 
         
@@ -86,10 +92,6 @@
 //    [self readJSONAndSaveInCoreData];
 
 }
-
-
-
-
 
 
 ////Чтение JSON
