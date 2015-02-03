@@ -19,6 +19,9 @@
 		B22103681A75FB9800BD0138 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B22103671A75FB9800BD0138 /* Images.xcassets */; };
 		B221036B1A75FB9800BD0138 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B22103691A75FB9800BD0138 /* LaunchScreen.xib */; };
 		B22103771A75FB9800BD0138 /* NumbersListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B22103761A75FB9800BD0138 /* NumbersListTests.m */; };
+		B22103821A8158B700BD0138 /* DataWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = B22103811A8158B700BD0138 /* DataWriter.m */; };
+		B22103851A8163FC00BD0138 /* DataCleaner.m in Sources */ = {isa = PBXBuildFile; fileRef = B22103841A8163FC00BD0138 /* DataCleaner.m */; };
+		B22103881A81641400BD0138 /* DataReader.m in Sources */ = {isa = PBXBuildFile; fileRef = B22103871A81641400BD0138 /* DataReader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,12 @@
 		B22103701A75FB9800BD0138 /* NumbersListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NumbersListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B22103751A75FB9800BD0138 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B22103761A75FB9800BD0138 /* NumbersListTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NumbersListTests.m; sourceTree = "<group>"; };
+		B22103801A8158B700BD0138 /* DataWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataWriter.h; sourceTree = "<group>"; };
+		B22103811A8158B700BD0138 /* DataWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataWriter.m; sourceTree = "<group>"; };
+		B22103831A8163FC00BD0138 /* DataCleaner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCleaner.h; sourceTree = "<group>"; };
+		B22103841A8163FC00BD0138 /* DataCleaner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCleaner.m; sourceTree = "<group>"; };
+		B22103861A81641400BD0138 /* DataReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataReader.h; sourceTree = "<group>"; };
+		B22103871A81641400BD0138 /* DataReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataReader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +110,12 @@
 				B22103621A75FB9800BD0138 /* ViewController.m */,
 				33032EC01A810897006091A5 /* ReceivingData.h */,
 				33032EC11A810897006091A5 /* ReceivingData.m */,
+				B22103801A8158B700BD0138 /* DataWriter.h */,
+				B22103811A8158B700BD0138 /* DataWriter.m */,
+				B22103831A8163FC00BD0138 /* DataCleaner.h */,
+				B22103841A8163FC00BD0138 /* DataCleaner.m */,
+				B22103861A81641400BD0138 /* DataReader.h */,
+				B22103871A81641400BD0138 /* DataReader.m */,
 				33032EBE1A8107B9006091A5 /* tempViewController */,
 				B22103641A75FB9800BD0138 /* Main.storyboard */,
 				B22103671A75FB9800BD0138 /* Images.xcassets */,
@@ -241,8 +256,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B221035D1A75FB9800BD0138 /* AppDelegate.m in Sources */,
+				B22103821A8158B700BD0138 /* DataWriter.m in Sources */,
 				B221035A1A75FB9800BD0138 /* main.m in Sources */,
 				B22103631A75FB9800BD0138 /* ViewController.m in Sources */,
+				B22103881A81641400BD0138 /* DataReader.m in Sources */,
+				B22103851A8163FC00BD0138 /* DataCleaner.m in Sources */,
 				33032EC21A810897006091A5 /* ReceivingData.m in Sources */,
 				33032EC51A811D6D006091A5 /* Numbers.m in Sources */,
 				B22103601A75FB9800BD0138 /* NumbersList.xcdatamodeld in Sources */,
