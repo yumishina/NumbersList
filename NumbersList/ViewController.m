@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "ReceivingData.h"
 
 @interface ViewController ()
 
@@ -14,6 +15,7 @@
 
 @implementation ViewController{
     UIActivityIndicatorView* indicator;
+    ReceivingData* getData;
 }
 
 - (void)viewDidLoad {
@@ -41,55 +43,104 @@
     [self cleanCoreData];
     
     //Чтение JSON
-    [self readJSONAndSaveInCoreData];
+    getData = [[ReceivingData alloc] init];
+     NSDate *start = [NSDate date];
+    [getData getNumericData:^(NSMutableArray *array) {
+        
+        
+        //Сохранение данных в CoreData
+        for (int i = 0; i < array.count; i++) {
+            NSLog(@"порядковый номер =  %d",i);
+            NSManagedObjectContext* context = [self managedObjectContext];
+            NSManagedObject* newNumbers = [NSEntityDescription insertNewObjectForEntityForName:@"Numbers" inManagedObjectContext:context];
+            [newNumbers setValue:[NSString stringWithFormat:@"%d", i] forKey:@"sequenceNumber"];
+            [newNumbers setValue:[NSString stringWithFormat:@"%@", [array objectAtIndex:i]] forKey:@"number"];
+            
+            NSError* error = nil;
+            if (![context save: &error]) {
+                NSLog(@"Can't save! %@ %@",error, [error localizedDescription]);
+            }
+            
+        }
+
+        
+        NSLog(@"arrayarrayarray=%lu",(unsigned long)array.count);
+        //Чтение из CoreData readFromCoreData
+        [self readFromCoreData];
+        
+        [self.tableView reloadData];
+        
+        NSTimeInterval timeInterval = [start timeIntervalSinceNow]; //подсчет времени
+        NSString *intervalString = [NSString stringWithFormat:@"%.4f", fabsf(timeInterval)];
+        self.timeLabel.text = intervalString;
+        self.countLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)self.arrayNumbers.count];
+        
+        // остановить анимацию
+        [indicator stopAnimating];
+        [indicator setHidesWhenStopped:YES];
+        
+    }];
+    
+    
+//    //Чтение JSON
+//    [self readJSONAndSaveInCoreData];
+
 }
 
-//Чтение JSON
--(void)readJSONAndSaveInCoreData{
-    
-    NSDate *start = [NSDate date];
-    
-    NSURLRequest* request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"https://gist.githubusercontent.com/yumishina/5f9d9460a720b4dc3f19/raw/3af83523fb34de34040bad1995f11c06d7660487/numbers"]];
-    // NSData* response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil]; //синхронная загрузка
-    
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *response,
-                                               NSData *data,
-                                               NSError *connectionError) {
-                               
-                               NSArray* tempArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&connectionError];
-                               NSLog(@"Есть ли массив = %lu",(unsigned long)tempArray.count);////////////
-                               
-                               //Сохранение данных в CoreData
-                               for (int i = 0; i < tempArray.count; i++) {
-                                   NSLog(@"порядковый номер =  %d",i);
-                                   NSManagedObjectContext* context = [self managedObjectContext];
-                                   NSManagedObject* newNumbers = [NSEntityDescription insertNewObjectForEntityForName:@"Numbers" inManagedObjectContext:context];
-                                   [newNumbers setValue:[NSString stringWithFormat:@"%d", i] forKey:@"sequenceNumber"];
-                                   [newNumbers setValue:[NSString stringWithFormat:@"%@", [tempArray objectAtIndex:i]] forKey:@"number"];
-                                   
-                                   NSError* error = nil;
-                                   if (![context save: &error]) {
-                                       NSLog(@"Can't save! %@ %@",error, [error localizedDescription]);
-                                   }
-                               }
-                               
-                               //Чтение из CoreData readFromCoreData
-                               [self readFromCoreData];
-                               
-                               [self.tableView reloadData];
-                               
-                               NSTimeInterval timeInterval = [start timeIntervalSinceNow]; //подсчет времени
-                               NSString *intervalString = [NSString stringWithFormat:@"%.4f", fabsf(timeInterval)];
-                               self.timeLabel.text = intervalString;
-                               self.countLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)self.arrayNumbers.count];
-                               
-                               // остановить анимацию
-                               [indicator stopAnimating];
-                               [indicator setHidesWhenStopped:YES];
-                           }];
-}
+
+
+
+
+
+////Чтение JSON
+//-(void)readJSONAndSaveInCoreData{
+//    
+//    NSDate *start = [NSDate date];
+//    
+//    NSURLRequest* request = [NSURLRequest requestWithURL: [NSURL URLWithString:@"https://gist.githubusercontent.com/yumishina/5f9d9460a720b4dc3f19/raw/3af83523fb34de34040bad1995f11c06d7660487/numbers"]];
+//    // NSData* response = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil]; //синхронная загрузка
+//    
+//    [NSURLConnection sendAsynchronousRequest:request
+//                                       queue:[NSOperationQueue mainQueue]
+//                           completionHandler:^(NSURLResponse *response,
+//                                               NSData *data,
+//                                               NSError *connectionError) {
+//                               
+//                               NSArray* tempArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:&connectionError];
+//                               NSLog(@"Есть ли массив = %lu",(unsigned long)tempArray.count);////////////
+//                               
+//                               //Сохранение данных в CoreData
+//                               for (int i = 0; i < tempArray.count; i++) {
+//                                   NSLog(@"порядковый номер =  %d",i);
+//                                   NSManagedObjectContext* context = [self managedObjectContext];
+//                                   NSManagedObject* newNumbers = [NSEntityDescription insertNewObjectForEntityForName:@"Numbers" inManagedObjectContext:context];
+//                                   [newNumbers setValue:[NSString stringWithFormat:@"%d", i] forKey:@"sequenceNumber"];
+//                                   [newNumbers setValue:[NSString stringWithFormat:@"%@", [tempArray objectAtIndex:i]] forKey:@"number"];
+//                                   
+//                                   NSError* error = nil;
+//                                   if (![context save: &error]) {
+//                                       NSLog(@"Can't save! %@ %@",error, [error localizedDescription]);
+//                                   }
+//                               }
+//                               
+//                               //Чтение из CoreData readFromCoreData
+//                               [self readFromCoreData];
+//                               
+//                               [self.tableView reloadData];
+//                               
+//                               NSTimeInterval timeInterval = [start timeIntervalSinceNow]; //подсчет времени
+//                               NSString *intervalString = [NSString stringWithFormat:@"%.4f", fabsf(timeInterval)];
+//                               self.timeLabel.text = intervalString;
+//                               self.countLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)self.arrayNumbers.count];
+//                               
+//                               // остановить анимацию
+//                               [indicator stopAnimating];
+//                               [indicator setHidesWhenStopped:YES];
+//                           }];
+//}
+
+
+
 
 //Чтение из CoreData readFromCoreData
 -(void)readFromCoreData{
