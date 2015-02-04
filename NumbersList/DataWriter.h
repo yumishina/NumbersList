@@ -11,6 +11,5 @@
 
 @interface DataWriter : NSObject
 
--(void)saveDataInCoreData;
 -(void)saveDataInCoreData:(void (^)())callback;
 @end
