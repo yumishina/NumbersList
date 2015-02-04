@@ -13,7 +13,7 @@
 
 
 //Очищение CoreData
--(void)cleanCoreData{
++(void)cleanCoreData{
     NSManagedObjectContext* managedObjectContext = [self managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:[NSEntityDescription entityForName:@"Numbers" inManagedObjectContext:managedObjectContext]];
@@ -27,7 +27,7 @@
 }
 
 //Удаление данных из CoreData
-- (void) deleteAllObjects: (NSString *) entityDescription  {
++(void) deleteAllObjects: (NSString *) entityDescription  {
     NSManagedObjectContext* managedObjectContext = [self managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityDescription inManagedObjectContext:managedObjectContext];
@@ -46,7 +46,7 @@
 }
 
  //Сохранение данных в CoreData
--(void)saveDataInCoreData:(void (^)())callback{
++(void)saveDataInCoreData:(void (^)())callback{
     ReceivingData* saveData = [[ReceivingData alloc] init];
     
     //Получение данных по JSON
@@ -66,10 +66,14 @@
             newNumber.sequenceNumber = [NSString stringWithFormat:@"%d", i];
             newNumber.number = [NSString stringWithFormat:@"%@", [array objectAtIndex:i]];
             
-            NSError* error = nil;
-            if (![context save: &error]) {
-                NSLog(@"Can't save! %@ %@",error, [error localizedDescription]);
+            if (i % 500 == 0 || i == array.count-1) {
+                NSLog(@"iiiii = %d",i);
+                NSError* error = nil;
+                if (![context save: &error]) {
+                    NSLog(@"Can't save! %@ %@",error, [error localizedDescription]);
+                }
             }
+            
         }
         callback();
         NSLog(@"arrayarrayarray=%lu",(unsigned long)array.count);
@@ -78,16 +82,45 @@
 
 
 //Чтение из CoreData
--(void)readFromCoreData:(void (^)(NSMutableArray *array))callback{
++(NSFetchedResultsController*)readFromCoreData{ //вернуть nsfetchresultcontroller не надо callback
     NSManagedObjectContext* managedObjectContext = [self managedObjectContext];
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Numbers"];
-    NSMutableArray* tempArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-    NSLog(@"self.arrayNumbers.count = %lu",(unsigned long)tempArray.count);
-    callback(tempArray);
+    
+   // NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Numbers"];
+   // NSMutableArray* tempArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+   
+    //Создание запроса
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Numbers" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity: entity];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"sequenceNumber" ascending:YES]];
+    
+    //[fetchRequest setFetchBatchSize:500];
+    
+    //Создание Controller запросов
+    NSFetchedResultsController* theFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    NSError *error;
+    if (![theFetchedResultsController performFetch:&error]) {
+        // Update to handle the error appropriately.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        exit(-1);  // Fail
+    }
+    
+    NSLog(@"self.arrayNumbers.count = %lu",(unsigned long)theFetchedResultsController.fetchedObjects.count);
+    return theFetchedResultsController;
 }
 
 
--(NSManagedObjectContext*)managedObjectContext{
+////Чтение из CoreData
+//+(void)readFromCoreData:(void (^)(NSMutableArray *array))callback{ //вернуть nsfetchresultcontroller не надо callback
+//    NSManagedObjectContext* managedObjectContext = [self managedObjectContext];
+//    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Numbers"];
+//    NSMutableArray* tempArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+//    NSLog(@"self.arrayNumbers.count = %lu",(unsigned long)tempArray.count);
+//    callback(tempArray);
+//}
+
+
++(NSManagedObjectContext*)managedObjectContext{
     NSManagedObjectContext* context = nil;
     id delegate =[[UIApplication sharedApplication] delegate];
     if ([delegate performSelector:@selector(managedObjectContext)]) {

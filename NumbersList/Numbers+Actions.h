@@ -12,8 +12,8 @@
 
 @interface Numbers (Actions)
 
--(void)cleanCoreData;//Очищение данных
--(void)saveDataInCoreData:(void (^)())callback; //сохранение
--(void)readFromCoreData:(void (^)(NSMutableArray *array))callback; //чтение данных
-
++(void)cleanCoreData;//Очищение данных
++(void)saveDataInCoreData:(void (^)())callback; //сохранение
+//+(void)readFromCoreData:(void (^)(NSMutableArray *array))callback; //чтение данных
++(NSFetchedResultsController*)readFromCoreData;
 @end

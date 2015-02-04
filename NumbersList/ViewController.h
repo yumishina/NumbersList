@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Numbers+Actions.h"
 
-@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
 @property(nonatomic,strong) NSArray* arrayNumbers;
 
@@ -20,6 +20,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
 
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
+
+@property(nonatomic, strong) NSFetchedResultsController* fetchedResultsController;
 
 @end
 
