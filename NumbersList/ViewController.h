@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
+#import "Numbers+Actions.h"
 
 @interface ViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
@@ -18,6 +18,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *countLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
+
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 
 @end
 

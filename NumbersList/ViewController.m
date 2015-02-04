@@ -18,15 +18,15 @@
 @end
 
 @implementation ViewController{
-    UIActivityIndicatorView* indicator;
+   
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     //Настройки tableView
-    self.tableView.delegate = self;
-    self.tableView.dataSource =  self;
+   // self.tableView.delegate = self;
+    //self.tableView.dataSource =  self;
     [self.navigationController.navigationBar setTranslucent:NO]; // отключаем свойство полупрозрачности панели навигации
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"customCell"];
     self.countLabel.layer.borderWidth = 1;
@@ -35,42 +35,37 @@
     self.timeLabel.layer.borderColor = [UIColor grayColor].CGColor;
     
     //Индикатор загрузки
-    indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [indicator setColor:[UIColor redColor]];
-    indicator.frame = CGRectMake(self.tableView.frame.size.width/2, self.tableView.frame.size.height/2, 10, 10);
-    [self.view addSubview:indicator];
+    [self.indicator setColor:[UIColor redColor]];
     //начать анимацию
-    [indicator startAnimating];
+    [self.indicator startAnimating];
+    
+    Numbers* actionNumber = [[Numbers alloc] init];
     
     //Очищение CoreData
-    DataCleaner* dataCleaner = [[DataCleaner alloc] init];
-    [dataCleaner cleanCoreData];
+    [actionNumber cleanCoreData];
     
     //Сохранение данных в CoreData
-    DataWriter* dataWriter = [[DataWriter alloc] init];
-    NSDate *start = [NSDate date]; // Начало отсчета времени
-    [dataWriter saveDataInCoreData:^() {
+     NSDate *start = [NSDate date]; // Начало отсчета времени
+    [actionNumber saveDataInCoreData:^{
         
-        //Чтение из CoreData readFromCoreData
-        DataReader* dataReader = [[DataReader alloc] init];
-        [dataReader readFromCoreData:^(NSMutableArray *array) {
+        //Чтение из CoreData
+        [actionNumber readFromCoreData:^(NSMutableArray *array) {
             self.arrayNumbers = array;
+            [self.tableView reloadData];
+            NSLog(@"self.arrayNumbers.count = %lu",(unsigned long)self.arrayNumbers.count);
+            
+            NSDate* end = [[NSDate alloc] init];
+            NSTimeInterval timeInterval = [end timeIntervalSinceDate:start]; //Окончание отсчета времени
+            // NSTimeInterval timeInterval = [start timeIntervalSinceNow]; //подсчет времени
+            
+            NSString *intervalString = [NSString stringWithFormat:@"%f", timeInterval];
+            self.timeLabel.text = intervalString;
+            self.countLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)self.arrayNumbers.count];
+            
+            // остановить анимацию
+            [self.indicator stopAnimating];
+            [self.indicator setHidesWhenStopped:YES];
         }];
-        NSLog(@"self.arrayNumbers.count = %lu",(unsigned long)self.arrayNumbers.count);
-        
-        [self.tableView reloadData];
-        
-        NSDate* end = [[NSDate alloc] init];
-        NSTimeInterval timeInterval = [end timeIntervalSinceDate:start]; //Окончание отсчета времени
-        // NSTimeInterval timeInterval = [start timeIntervalSinceNow]; //подсчет времени
-        
-        NSString *intervalString = [NSString stringWithFormat:@"%f", timeInterval];
-        self.timeLabel.text = intervalString;
-        self.countLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)self.arrayNumbers.count];
-        
-        // остановить анимацию
-        [indicator stopAnimating];
-        [indicator setHidesWhenStopped:YES];
     }];
 }
 

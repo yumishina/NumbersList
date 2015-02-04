@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DataReader : NSObject
+@interface DataReader : NSObject //Назвать класс NetworkManager
+
 -(void)readFromCoreData:(void (^)(NSMutableArray *array))callback;
+
 @end

@@ -13,7 +13,7 @@
 #import <UIKit/UIKit.h>
 
 @implementation DataWriter{
-    NSMutableArray* tempArray;
+   
 }
 
 - (instancetype)init {
